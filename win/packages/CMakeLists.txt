@@ -66,6 +66,8 @@ list(APPEND ep
     libva
     libzvbi
     libaribcaption
+    opencl-headers
+    opencl
     ffmpeg
     mpv
     mpv-packaging

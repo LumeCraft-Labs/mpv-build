@@ -1,0 +1,11 @@
+prefix=@MINGW_INSTALL_PREFIX@
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: OpenCL
+Description: OpenCL ICD Loader
+Version: 9999
+Cflags: -I${includedir}
+Libs: -L${libdir} -l:OpenCL.a
+Libs.private: -lole32 -lshlwapi -lcfgmgr32

@@ -1,0 +1,33 @@
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/OpenCL.pc.in ${CMAKE_CURRENT_BINARY_DIR}/OpenCL.pc @ONLY)
+
+ExternalProject_Add(opencl
+    DEPENDS opencl-headers
+    GIT_REPOSITORY https://github.com/KhronosGroup/OpenCL-ICD-Loader.git
+    SOURCE_DIR ${SOURCE_LOCATION}
+    GIT_CLONE_FLAGS "--filter=tree:0"
+    GIT_TAG b1c57534df7ac82519b04606f51b71fb5d4053c3
+    UPDATE_COMMAND ""
+    CONFIGURE_COMMAND ${EXEC} CONF=1 cmake -H<SOURCE_DIR> -B<BINARY_DIR>
+        -G Ninja
+        -DCMAKE_BUILD_TYPE=Release
+        -DCMAKE_TOOLCHAIN_FILE=${TOOLCHAIN_FILE}
+        -DCMAKE_INSTALL_PREFIX=${MINGW_INSTALL_PREFIX}
+        -DCMAKE_FIND_ROOT_PATH=${MINGW_INSTALL_PREFIX}
+        -DOPENCL_ICD_LOADER_HEADERS_DIR=${MINGW_INSTALL_PREFIX}/include
+        -DOPENCL_ICD_LOADER_BUILD_SHARED_LIBS=OFF
+        -DOPENCL_ICD_LOADER_DISABLE_OPENCLON12=ON
+        -DOPENCL_ICD_LOADER_PIC=ON
+        -DOPENCL_ICD_LOADER_BUILD_TESTING=OFF
+        -DBUILD_TESTING=OFF
+    BUILD_COMMAND ${EXEC} ninja -C <BINARY_DIR>
+    INSTALL_COMMAND ${EXEC} ninja -C <BINARY_DIR> install
+    LOG_DOWNLOAD 1 LOG_UPDATE 1 LOG_CONFIGURE 1 LOG_BUILD 1 LOG_INSTALL 1
+)
+
+ExternalProject_Add_Step(opencl install-pc
+    DEPENDEES install
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/OpenCL.pc ${MINGW_INSTALL_PREFIX}/lib/pkgconfig/OpenCL.pc
+)
+
+force_rebuild_git(opencl)
+cleanup(opencl install-pc)

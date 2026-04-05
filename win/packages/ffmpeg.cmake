@@ -34,6 +34,7 @@ ExternalProject_Add(ffmpeg
         ${ffmpeg_davs2}
         rubberband
         libva
+        opencl
     GIT_REPOSITORY https://github.com/FFmpeg/FFmpeg.git
     SOURCE_DIR ${SOURCE_LOCATION}
     GIT_CLONE_FLAGS "--sparse --filter=tree:0"
@@ -85,6 +86,7 @@ ExternalProject_Add(ffmpeg
         --enable-amf
         --enable-opengl
         --enable-vaapi
+        --enable-opencl
         --disable-doc
         --disable-ffplay
         --disable-ffprobe
