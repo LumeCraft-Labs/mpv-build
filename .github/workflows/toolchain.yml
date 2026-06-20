@@ -102,7 +102,7 @@ jobs:
           git config --global rebase.autoStash true
           git config --global fetch.prune true
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
@@ -179,7 +179,7 @@ jobs:
           git config --global rebase.autoStash true
           git config --global fetch.prune true
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
@@ -275,7 +275,7 @@ jobs:
         run: |
           sudo pacman -Syu --noconfirm
           sudo pacman -S --noconfirm --needed git curl
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       
       - name: Resave llvm cache
         id: llvm

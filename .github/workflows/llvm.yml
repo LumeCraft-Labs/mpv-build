@@ -73,7 +73,7 @@ jobs:
           sudo cipd install fuchsia/third_party/clang/linux-amd64 latest -root /usr/local/fuchsia-clang
           echo "PATH=/usr/local/fuchsia-clang/bin:$PATH" >> $GITHUB_ENV
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
