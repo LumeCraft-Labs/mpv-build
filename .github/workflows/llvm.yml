@@ -116,7 +116,7 @@ jobs:
           patches: ${{ inputs.patches }}
 
       - name: Save llvm cache
-        uses: actions/cache/save@v5
+        uses: actions/cache/save@v6
         if: ${{ !inputs.no_save_cache }}
         with: 
           path: |
